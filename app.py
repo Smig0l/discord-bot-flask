@@ -7,11 +7,11 @@ app = Flask(__name__)
 def download():
     url = request.args.get('q')
     ydl_opts = {
-        'format': 'm4a/bestaudio/best',
+        'format': 'bestaudio/best',
         'outtmpl': 'audio.mp3',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'm4a'
+            'preferredcodec': 'mp3'
         }]
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
