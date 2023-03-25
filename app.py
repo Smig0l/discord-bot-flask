@@ -8,7 +8,7 @@ def download():
     url = request.args.get('q')
     ydl_opts = {
         'format': 'bestaudio/best',
-        'outtmpl': 'audio.mp3',
+        'outtmpl': '%(title)s.%(ext)s',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3'
@@ -16,4 +16,4 @@ def download():
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-    return send_file('audio.mp3', as_attachment=True)
+    return send_file('Guè - Da 1k In Su (Visual) ft. Benny The Butcher.mp3', as_attachment=True)
