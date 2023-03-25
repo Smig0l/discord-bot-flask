@@ -1,5 +1,6 @@
 from flask import Flask, request, send_file
 import yt_dlp
+import os
 
 app = Flask(__name__)
 
@@ -16,4 +17,10 @@ def download():
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-    return send_file('Guè - Da 1k In Su (Visual) ft. Benny The Butcher.mp3', as_attachment=True)
+        info_dict = ydl.extract_info(url, download=False)
+        filename = ydl.prepare_filename(info_dict)
+
+    filename, ext = os.path.splitext(filename)
+    filename = f"{filename}.mp3"
+
+    return send_file(filename, as_attachment=True)
