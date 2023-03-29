@@ -1,3 +1,4 @@
 Flask
-Gunicorn
 yt-dlp
+discord
+python-dotenv

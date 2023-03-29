@@ -14,3 +14,7 @@ add `export PATH=$PATH:/home/youruser/.local/bin` to `~/.bashrc` , save and `sou
 ~~run with: `gunicorn app:app`~~
 
 for deploying with replit: `python3 app.py`
+
+discord.py:
+[repo](https://github.com/Rapptz/discord.py)  &&
+[docs](https://discordpy.readthedocs.io/en/stable/discord.html)

@@ -1,6 +1,12 @@
-from flask import Flask, request, send_file, redirect, url_for
+from flask import Flask, request, send_file
 import yt_dlp
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -32,4 +38,31 @@ def download():
     os.remove(filename)
     return response 
 
-app.run(host='0.0.0.0', port=8000)
+def start_flask_app():
+    app.run(host='0.0.0.0', port=8000)
+
+flask_thread = Thread(target=start_flask_app)
+flask_thread.start()
+
+# This example requires the 'message_content' privileged intent to function.
+yt_dlp.utils.bug_reports_message = lambda: ''
+import asyncio
+import discord
+from discord.ext import commands
+description = '''somedescription.'''
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='?', description=description, intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print('------')
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send('pong')
+
+bot.run(os.getenv("DISCORD_TOKEN"))
